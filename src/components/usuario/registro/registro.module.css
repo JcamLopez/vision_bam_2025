@@ -1,0 +1,60 @@
+.formGrid {
+    display: grid;
+    gap: 1rem;
+}
+
+.titulo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: 1/-1;
+}
+
+.titulo_h2 {
+    grid-column: 1/-1;
+
+}
+
+.card {
+    position: relative;
+    width: 90%;
+    left: 50%;
+    top: 50px;
+    bottom: 50px;
+    transform: translateX(-50%);
+}
+
+.container_img {
+    display: flex;
+    justify-content: center;
+    grid-column: 1/-1;
+
+}
+
+/* Teléfono pequeño: 1 columna, 1 fila */
+@container card (max-width: 500px) {
+    .formGrid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+/* Teléfono grande / phablet */
+@container card (min-width: 501px) and (max-width: 700px) {
+    .formGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Tablet vertical */
+@container card (min-width: 701px) and (max-width: 900px) {
+    .formGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Laptop / escritorio */
+@container card (min-width: 901px) {
+    .formGrid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

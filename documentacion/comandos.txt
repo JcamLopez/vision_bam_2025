@@ -1,0 +1,6 @@
+npx create-next-app@latest nombre-de-tu-proyecto
+npm install react-hook-form
+npm install mysql2
+npm install zod
+npm install @hookform/resolvers zod
+npm install --save-dev @types/bcrypt

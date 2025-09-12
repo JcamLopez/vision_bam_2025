@@ -87,7 +87,7 @@ function registro() {
     return (
 
         <Card className={style.card}>
-            <Form onSubmit={handleSubmit(onSubmitForm)} columns={4} >
+            <form  className={style.formGrid} onSubmit={handleSubmit(onSubmitForm)}  >
                 <div className={style.titulo}>
                     <h1>Registro estudiante</h1>
                 </div>
@@ -228,7 +228,9 @@ function registro() {
                     register={register('tipo', { required: 'Este campo es obligatorio' })}
                     error={errors.doc}
                 />
-            </Form>
+
+                
+            </form>
         </Card>
 
 

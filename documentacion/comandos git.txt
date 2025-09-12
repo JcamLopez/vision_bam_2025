@@ -7,3 +7,11 @@ git checkout main  (main es el nombre de la rama)  = este comando sirve para cam
 git pull origin main (main es el nombre de la rama) = trae todos los datos que hay en git hub a la rama main local
 git checkout -b  nombre de la nueva rama = este comando sirve para crear una nueva rama 
 git branch -r = sirve para ver todas las ramas creadas
+
+
+
+------------------------Fusionar las ramas----------------------------
+git fetch origin
+git checkout main
+git pull origin main
+git merge nombre-de-tu-rama

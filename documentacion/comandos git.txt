@@ -1,6 +1,7 @@
 git status = sirve para ver los cambios que se han hecho y que aun no se han guardado 
 git add . = guarda todos los cambios que se han hecho 
 git commit -m "mensaje que desea guardar con los cambios, aquidebe ir uan descripcion de lo que ha hecho en los cambios"
+git push -u origin nombre-de-la-rama = este comando sirve para publicar todos los cambios de una rama
 git fetch origin  = Trae todo lo nuevo  en el repositorio  
 git checkout main  (main es el nombre de la rama)  = este comando sirve para cambiar entre ramas
 git pull origin main (main es el nombre de la rama) = trae todos los datos que hay en git hub a la rama main local

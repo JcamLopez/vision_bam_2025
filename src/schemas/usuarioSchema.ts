@@ -15,7 +15,7 @@ export const usuarioSchema = z.object({
     ap2: z.string().optional(),
     email: z.string().email({ message: "Correo electrónico inválido" }),
     genero: generoEnum,
-    fecha_nacimiento: z.string().refine((date) => {
+    fecha_nacimiento: z.string().refine((date:any) => {
         return !isNaN(Date.parse(date));
     }, { message: "Fecha de nacimiento inválida" }),
     tel: z.string()

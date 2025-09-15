@@ -30,7 +30,26 @@ export const usuarioSchema = z.object({
         .regex(/[0-9]/, "Debe contener al menos un número")
         .regex(/[^A-Za-z0-9]/, "Debe contener al menos un carácter especial"),
     departamento: z.string().min(1, { message: "El departamento es obligatorio" }),
-    municipio: z.string().min(1, { message: "El municipio es obligatorio" })
+    municipio: z.string().min(1, { message: "El municipio es obligatorio" }),
+    formacion: z.string().min(1, { message: "El municipio es obligatorio" }),
+    titulo_formacion: z.string().min(1, { message: "El municipio es obligatorio" }),
+    grado_escalafon: z.string().min(1, { message: "El municipio es obligatorio" }),
+    nivel_salarial: z.string().min(1, { message: "El municipio es obligatorio" }),
+    nivel_academico: z.string().min(1, { message: "El municipio es obligatorio" }),
+    departamento_acudiente: z.string().optional,
+    municipio_acudiente: z.string().optional,
+    barrio_acudiente: z.string().optional,
+    direccion_acudiente: z.string().optional,
+    fecha_nacimientos: z.date,
+    numero_documento_acudiente: z.string()
+        .length(10, { message: "El documento debe tener exactamente 10 dígitos" })
+        .regex(/^\d+$/, { message: "El documento solo puede contener números" }),
+    n1_acudiente: z.string().optional,
+    n2_acudiente: z.string().optional,
+    ap1_acudiente: z.string().optional,
+    ap2_acudiente: z.string().optional,
+    correo_acudiente: z.string().optional,
+    telefono_acudiente: z.string().optional,
 });
 
 export type usuarioPayload = z.infer<typeof usuarioSchema>;

@@ -29,7 +29,6 @@ export default function Avatar({ initialSrc }: AvatarUploadProps) {
                 src={imageSrc || '/img/hombre_mujer.png'}
                 alt="Foto de perfil"
                 className={styles["avatar-image"]}
-
             />
             <div className={styles["avatar-overlay"]} >Cambiar foto</div>
             <input type="file" accept="image/*" ref={fileInputRef} onChange={handleChange} style={{ display: 'none' }} />

@@ -1,11 +1,18 @@
-import { NextResponse } from 'next/server'
-import { obtenerRol } from '@/services/backend/rolServices';
+import { NextResponse } from 'next/server';
+import { departamentoSchema } from '@/schemas/municipioSchema'
+import { obtenerMunicipio } from '@/services/backend/municipioServices';
 
-export async function GET() {
-    try {
-        const roles = await obtenerRol();
-        return NextResponse.json(roles);
-    } catch (error) {
-        return NextResponse.json({ error: 'Error interno del servidor' }, { status: 500 });
+
+export async function GET(req: Request) {
+    const { searchParams } = new URL(req.url);
+    const departamentoId = searchParams.get('departamentoId');
+    const result = departamentoSchema.safeParse({ departamentoId });
+    if (!result.success) {
+        console.warn('[API] Error de validación:', result.error.format());
+        return NextResponse.json({ error: 'ID de departamento inválido' }, { status: 400 });
     }
+    const depaId = Number(departamentoId);
+    const municipios = await obtenerMunicipio(depaId);
+    return NextResponse.json(municipios);
+
 }

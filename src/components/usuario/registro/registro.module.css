@@ -31,6 +31,12 @@
 
 }
 
+.boton {
+    width: 100%;
+    grid-column: 1/-1;
+    
+}
+
 /* Teléfono pequeño: 1 columna, 1 fila */
 @container card (max-width: 500px) {
     .formGrid {

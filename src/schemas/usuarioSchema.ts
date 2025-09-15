@@ -29,7 +29,8 @@ export const usuarioSchema = z.object({
         .regex(/[a-z]/, "Debe contener al menos una letra minúscula")
         .regex(/[0-9]/, "Debe contener al menos un número")
         .regex(/[^A-Za-z0-9]/, "Debe contener al menos un carácter especial"),
-
+    departamento: z.string().min(1, { message: "El departamento es obligatorio" }),
+    municipio: z.string().min(1, { message: "El municipio es obligatorio" })
 });
 
 export type usuarioPayload = z.infer<typeof usuarioSchema>;

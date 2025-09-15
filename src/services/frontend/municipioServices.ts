@@ -1,6 +1,9 @@
-export async function obtenerMunicipio(): Promise<{id: number; depa: number; cod:number , muni:string}[]> {
+
+
+export async function obtenerMunicipio(departamentoId: number): Promise<{ id: number;  deapartamento: number; codigo : number, nombre: string }[]> {
+
   try {
-    const response = await fetch('/api/genero', {
+    const response = await fetch(`/api/municipio?departamentoId=${departamentoId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

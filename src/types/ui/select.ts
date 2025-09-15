@@ -34,3 +34,8 @@ export type SelectDepartamento = {
   label: string;
   value: number;
 };
+
+export type SelectMunicipio = {
+  label: string;
+  value: number;
+};

@@ -1,5 +1,4 @@
 
-
 import { db } from '@/libs/db';
 export async function obtenerDepartamento() {
     try {

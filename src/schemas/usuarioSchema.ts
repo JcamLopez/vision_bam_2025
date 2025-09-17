@@ -50,6 +50,7 @@ export const usuarioSchema = z.object({
     ap2_acudiente: z.string().optional,
     correo_acudiente: z.string().optional,
     telefono_acudiente: z.string().optional,
+     parentezco: z.string().optional,
 });
 
 export type usuarioPayload = z.infer<typeof usuarioSchema>;

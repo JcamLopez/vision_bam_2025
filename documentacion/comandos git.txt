@@ -12,3 +12,10 @@ git fetch origin
 git checkout main
 git pull origin main
 git merge nombre-de-tu-rama
+
+
+--------descargar una rama remota----------------------
+
+git fetch --all
+git branch -r
+git checkout -b nombre-local origin/nombre-remoto

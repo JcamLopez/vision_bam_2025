@@ -17,7 +17,11 @@ import { obtenerGenero } from '@/services/frontend/generoServices';
 import { obtenerRol } from '@/services/frontend/rolServices';
 import { obtenerDepartamento } from '@/services/frontend/departamentoServices'
 import { obtenerMunicipio } from '@/services/frontend/municipioServices'
-import { SelectipoDocumento, SelectDepartamento, SelectGenero, SelectRol, SelectMunicipio } from '@/types/ui/select';
+import { obtenerFormacion } from '@/services/frontend/formacionServices'
+import { obtenerEscalafon } from '@/services/frontend/escalafonServices'
+import { obtenerNivelAcademico } from '@/services/frontend/nivelAcademicoServices'
+import { obtenerNivelSalarial } from '@/services/frontend/nivelSalarialServices'
+import { SelectipoDocumento, SelectDepartamento, SelectGenero, SelectRol, SelectMunicipio, SelectFormacion, SelectEscalafon, SelectNivelSalarial, SelectNivelAcademico } from '@/types/ui/select';
 
 
 function registro() {
@@ -27,7 +31,11 @@ function registro() {
     const [departamentos, setDepartamentos] = useState<SelectDepartamento[]>([]);
     const [municipios, setMunicipios] = useState<SelectMunicipio[]>([]);
     const [municipios_acudiente, setMunicipiosAcudiente] = useState<SelectMunicipio[]>([]);
-    const [departamentos_acudiente, setMunicipiosDepartamentos] = useState<SelectMunicipio[]>([]);
+    const [formacion, setFormacion] = useState<SelectFormacion[]>([]);
+    const [escalafon, setEscalafon] = useState<SelectEscalafon[]>([]);
+    const [nivel_salarial, setNivelSalarial] = useState<SelectNivelSalarial[]>([]);
+    const [nivel_academico, setNivelAcademico] = useState<SelectNivelAcademico[]>([]);
+
     const [rol, setRol] = useState<string>('');
 
 
@@ -66,9 +74,6 @@ function registro() {
     }, []);
 
 
-
-
-
     const {
         register,
         handleSubmit,
@@ -77,22 +82,40 @@ function registro() {
         resolver: zodResolver(usuarioSchema),
     });
 
-    const onSubmitForm = async (datos: usuarioPayload) => {
-        try {
-            const res = await fetch("/api/tipo_documento", {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(datos),
-            });
-            console.log(res)
-        } catch (error) {
-            console.error("Error al consultar el usuario:", error);
-        }
 
+    useEffect(() => {
+        console.log("Errores actuales:", errors);
+    }, [errors]);
+
+    const onSubmitForm = async (datos: usuarioPayload) => {
+        /*      try {
+                 const res = await fetch("/api/tipo_documento", {
+                     method: "GET",
+                     headers: { "Content-Type": "application/json" },
+                     body: JSON.stringify(datos),
+                 });
+                 console.log(res)
+             } catch (error) {
+                 console.error("Error al consultar el usuario:", error);
+             } */
+        const dat = {
+            ...datos,
+            fecha_nacimiento: datos.fecha_nacimiento
+                ? new Date(datos.fecha_nacimiento)
+                : undefined,
+        }
+        const result = usuarioSchema.safeParse(dat);
+        if (!result.success) {
+            console.log(result.error.format());
+        } else {
+
+            console.log(result.data);
+        }
+        console.log("sssssssssssssss")
+        console.log(datos)
     };
 
     return (
-
         <Card className={style.card}>
             <form className={style.formGrid} onSubmit={handleSubmit(onSubmitForm)}  >
                 <div className={style.titulo}>
@@ -108,8 +131,8 @@ function registro() {
                     label="Tipo de documento"
                     name="tipo"
                     options={tipos}
-                    register={register('tipo', { required: 'Este campo es obligatorio' })}
-                    error={errors.doc}
+                    register={register('tipo')}
+                    error={errors.tipo}
                 />
 
                 <Input
@@ -125,7 +148,7 @@ function registro() {
                     name="n1"
                     placeholder="Primer nombre"
                     register={register('n1')}
-                    error={errors.doc}
+                    error={errors.n1}
                 />
 
                 <Input
@@ -133,7 +156,7 @@ function registro() {
                     name="n2"
                     placeholder="Segundo nombre"
                     register={register('n2')}
-                    error={errors.doc}
+                    error={errors.n2}
                 />
 
                 <Input
@@ -141,7 +164,7 @@ function registro() {
                     name="ap1"
                     placeholder="Primer apellido"
                     register={register('ap1')}
-                    error={errors.doc}
+                    error={errors.ap1}
                 />
 
                 <Input
@@ -149,14 +172,14 @@ function registro() {
                     name="ap2"
                     placeholder="Segundo apellido"
                     register={register('ap2')}
-                    error={errors.doc}
+                    error={errors.ap2}
                 />
                 <Select
                     label="Genero"
                     name="genero"
                     options={generos}
                     register={register('genero', { required: 'Este campo es obligatorio' })}
-                    error={errors.doc}
+                    error={errors.genero}
                 />
 
                 <Input
@@ -165,7 +188,7 @@ function registro() {
                     type='email'
                     placeholder="Correo electrónico"
                     register={register('email')}
-                    error={errors.doc}
+                    error={errors.email}
                 />
 
 
@@ -175,7 +198,7 @@ function registro() {
                     name="tel"
                     placeholder="Teléfono"
                     register={register('tel')}
-                    error={errors.doc}
+                    error={errors.tel}
                 />
 
                 <Input
@@ -184,21 +207,52 @@ function registro() {
                     type='password'
                     placeholder="Contraseña"
                     register={register('clave')}
-                    error={errors.doc}
+                    error={errors.clave}
                 />
 
                 <Select
                     label="Rol"
                     name="rol"
                     options={roles}
-                    register={register('rol', { required: 'Este campo es obligatorio' })}
+                    register={register('rol')}
                     onChange={(e) => {
                         const value = e.target.value;
-                        console.log("este es mi rol")
-                        console.log(value)
-                        setRol(value);
+                        setRol(value)
+
+                        if (value === "DOCENTE") {
+                            obtenerFormacion().then((dato) => {
+                                const opciones = dato.map((data) => ({
+                                    label: data.formacion,
+                                    value: data.id,
+                                }));
+                                setFormacion(opciones)
+                            });
+
+                             obtenerEscalafon().then((dato) => {
+                                const opciones = dato.map((data) => ({
+                                    label: data.escalafon,
+                                    value: data.id,
+                                }));
+                                setEscalafon(opciones)
+                            });
+                             obtenerNivelSalarial().then((dato) => {
+                                const opciones = dato.map((data) => ({
+                                    label: data.nivel,
+                                    value: data.id,
+                                }));
+                                setNivelSalarial(opciones)
+                            });
+
+                            obtenerNivelAcademico().then((dato) => {
+                                const opciones = dato.map((data) => ({
+                                    label: data.nivel,
+                                    value: data.id,
+                                }));
+                                setNivelAcademico(opciones)
+                            });
+                        }
                     }}
-                    error={errors.doc}
+                    error={errors.rol}
 
                 />
 
@@ -206,9 +260,8 @@ function registro() {
                     label="Departamento"
                     name="departamento"
                     options={departamentos}
-                    register={register('departamento', { required: 'Este campo es obligatorio' })}
+                    register={register('departamento')}
                     onChange={(e) => {
-                            {console.log("departamento persona")}
                         const value = Number(e.target.value);
                         obtenerMunicipio(value).then((dato) => {
                             const opciones = dato.map((data) => ({
@@ -219,7 +272,7 @@ function registro() {
                         });
                     }}
 
-                    error={errors.doc}
+                    error={errors.departamento}
                 />
 
 
@@ -228,31 +281,30 @@ function registro() {
                     name="municipio"
                     options={municipios}
                     register={register('municipio', { required: 'Este campo es obligatorio' })}
-                    error={errors.doc}
+                    error={errors.municipio}
                 />
 
 
                 <Input
                     label="Barrio"
                     name="barrio"
-                    type='password'
-                    placeholder="Contraseña"
-                    register={register('clave')}
-                    error={errors.doc}
+                    type='text'
+                    placeholder="Barrio"
+                    register={register('barrio')}
+                    error={errors.barrio}
 
 
                 />
 
                 <Input
                     label="Direccion"
-                    name="barrio"
+                    name="direccion"
                     type='text'
-                    placeholder="Contraseña"
-                    register={register('clave')}
-                    error={errors.doc}
+                    placeholder="Direccion"
+                    register={register('direccion')}
+                    error={errors.direccion}
 
                 />
-
 
 
 
@@ -265,10 +317,10 @@ function registro() {
 
                         <Input
                             label="Fecha de nacimiento"
-                            name="fecha_nacimientos"
+                            name="fecha_nacimiento"
                             type='date'
-                            register={register('fecha_nacimientos')}
-                            error={errors.doc}
+                            register={register('fecha_nacimiento', { valueAsDate: true })}
+                            error={errors.fecha_nacimiento}
 
                         />
 
@@ -276,10 +328,10 @@ function registro() {
 
                         <Input
                             label="Numero de documento"
-                            name="numer_documento_acudiente"
+                            name="numero_documento_acudiente"
                             placeholder="Documento"
                             register={register('numero_documento_acudiente')}
-                            error={errors.doc}
+                            error={errors.numero_documento_acudiente}
                         />
 
                         <Input
@@ -287,7 +339,7 @@ function registro() {
                             name="n1_acudiente"
                             placeholder="Primer nombre"
                             register={register('n1_acudiente')}
-                            error={errors.doc}
+                            error={errors.n1_acudiente}
                         />
 
                         <Input
@@ -295,7 +347,7 @@ function registro() {
                             name="n2_acudiente"
                             placeholder="Segundo nombre"
                             register={register('n2_acudiente')}
-                            error={errors.doc}
+                            error={errors.n2_acudiente}
                         />
 
                         <Input
@@ -303,15 +355,15 @@ function registro() {
                             name="ap1_acudiente"
                             placeholder="Primer apellido"
                             register={register('ap1_acudiente')}
-                            error={errors.doc}
+                            error={errors.ap1_acudiente}
                         />
 
                         <Input
                             label="Segundo apellido"
-                            name="ap2_acudient"
+                            name="ap2_acudiente"
                             placeholder="Primer apellido"
                             register={register('ap2_acudiente')}
-                            error={errors.doc}
+                            error={errors.ap2_acudiente}
                         />
 
 
@@ -321,7 +373,7 @@ function registro() {
                             type='email'
                             placeholder="Correo electrónico"
                             register={register('correo_acudiente')}
-                            error={errors.doc}
+                            error={errors.correo_acudiente}
                         />
 
 
@@ -331,7 +383,7 @@ function registro() {
                             name="telefono_acudiente"
                             placeholder="Teléfono"
                             register={register('telefono_acudiente')}
-                            error={errors.doc}
+                            error={errors.telefono_acudiente}
                         />
 
                         <Select
@@ -340,7 +392,7 @@ function registro() {
                             options={departamentos}
                             register={register('departamento_acudiente', { required: 'Este campo es obligatorio' })}
                             onChange={(e) => {
-                                {console.log("departamento acudiente")}
+                                { console.log("departamento acudiente") }
                                 const value = Number(e.target.value);
                                 obtenerMunicipio(value).then((dato) => {
                                     const opciones = dato.map((data) => ({
@@ -350,7 +402,7 @@ function registro() {
                                     setMunicipiosAcudiente(opciones)
                                 });
                             }}
-                            error={errors.doc}
+                            error={errors.departamento_acudiente}
                         />
 
 
@@ -359,7 +411,7 @@ function registro() {
                             name="municipio_acudiente"
                             options={municipios_acudiente}
                             register={register('municipio_acudiente', { required: 'Este campo es obligatorio' })}
-                            error={errors.doc}
+                            error={errors.municipio_acudiente}
                         />
 
 
@@ -369,7 +421,7 @@ function registro() {
                             type='text'
                             placeholder="Barrio"
                             register={register('barrio_acudiente')}
-                            error={errors.doc}
+                            error={errors.barrio_acudiente}
                         />
 
                         <Input
@@ -378,23 +430,22 @@ function registro() {
                             type='text'
                             placeholder="Direccion"
                             register={register('direccion_acudiente')}
-                            error={errors.doc}
+                            error={errors.direccion_acudiente}
 
                         />
 
 
                         <Input
                             label="Parentezco"
-                            name="barrio"
+                            name="parentezco"
                             type='text'
                             placeholder="Parentezco"
                             register={register('parentezco')}
-                            error={errors.doc}
+                            error={errors.parentezco}
 
                         />
                     </>
                 )}
-
 
 
                 {rol === 'DOCENTE' && (
@@ -406,66 +457,58 @@ function registro() {
                             type='text'
                             placeholder="Titulo de formacion academica"
                             register={register('titulo_formacion')}
-                            error={errors.doc}
+                            error={errors.titulo_formacion}
                         />
 
                         <Select
                             label="Formacion"
                             name="formacion"
-                            options={roles}
-                            register={register('formacion', { required: 'Este campo es obligatorio' })}
+                            options={formacion}
+                            register={register('formacion')}
                             onChange={(e) => {
                                 const value = e.target.value;
-                                console.log("este es mi rol")
-                                console.log(value)
-                                setRol(value);
+                                
                             }}
-                            error={errors.doc}
+                            error={errors.formacion}
                         />
 
 
                         <Select
                             label="Grado escalafon"
                             name="grado_escalafon"
-                            options={roles}
-                            register={register('grado_escalafon', { required: 'Este campo es obligatorio' })}
+                            options={escalafon}
+                            register={register('grado_escalafon')}
                             onChange={(e) => {
                                 const value = e.target.value;
-                                console.log("este es mi rol")
-                                console.log(value)
-                                setRol(value);
+                               
                             }}
-                            error={errors.doc}
+                            error={errors.grado_escalafon}
                         />
 
 
                         <Select
                             label="Nivel salarial"
                             name="nivel_salarial"
-                            options={roles}
-                            register={register('nivel_salarial', { required: 'Este campo es obligatorio' })}
+                            options={nivel_salarial}
+                            register={register('nivel_salarial')}
                             onChange={(e) => {
                                 const value = e.target.value;
-                                console.log("este es mi rol")
-                                console.log(value)
-                                setRol(value);
+                                
                             }}
-                            error={errors.doc}
+                            error={errors.nivel_salarial}
                         />
 
 
                         <Select
                             label="Nivel academico"
-                            name="tipo"
-                            options={roles}
+                            name="nivel_academico"
+                            options={nivel_academico}
                             register={register('nivel_academico', { required: 'Este campo es obligatorio' })}
                             onChange={(e) => {
                                 const value = e.target.value;
-                                console.log("este es mi rol")
-                                console.log(value)
-                                setRol(value);
+                              
                             }}
-                            error={errors.doc}
+                            error={errors.nivel_academico}
                         />
                     </>)}
 
@@ -473,7 +516,8 @@ function registro() {
 
 
 
-                <Button nombre='Registrar' className={style.boton} />
+
+                <Button type="submit" nombre='Registrar' className={style.boton} />
 
 
 

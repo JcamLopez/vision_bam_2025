@@ -19,7 +19,7 @@ function Selector({
             {label && <label htmlFor={name}>{label}</label>}
             <select
                 id={name}
-                className={`select-field ${error ? 'select-error' : ''}`}
+                className={`select-field ${error ? 'select-error' : ''}`} 
                 {...register} onChange={onChange}
             >
                 <option value="">{placeholder}</option>

@@ -12,6 +12,7 @@
     "@hookform/resolvers": "^5.2.1",
     "@popperjs/core": "^2.11.8",
     "@types/bootstrap": "^5.2.10",
+    "bcrypt": "^6.0.0",
     "bootstrap": "^5.3.8",
     "mysql2": "^3.14.5",
     "next": "15.5.2",
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@types/bcrypt": "^6.0.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

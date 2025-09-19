@@ -88,31 +88,30 @@ function registro() {
     }, [errors]);
 
     const onSubmitForm = async (datos: usuarioPayload) => {
-        /*      try {
-                 const res = await fetch("/api/tipo_documento", {
-                     method: "GET",
-                     headers: { "Content-Type": "application/json" },
-                     body: JSON.stringify(datos),
-                 });
-                 console.log(res)
-             } catch (error) {
-                 console.error("Error al consultar el usuario:", error);
-             } */
-        const dat = {
-            ...datos,
-            fecha_nacimiento: datos.fecha_nacimiento
-                ? new Date(datos.fecha_nacimiento)
-                : undefined,
+        try {
+            const dat = {
+                ...datos,
+                fecha_nacimiento: datos.fecha_nacimiento
+                    ? new Date(datos.fecha_nacimiento)
+                    : undefined,
+            }
+            const result = usuarioSchema.safeParse(dat);
+            if (!result.success) {
+                console.log(result.error.format());
+            } else {
+                console.log(result.data);
+            }
+            const res = await fetch("/api/usuario", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(datos),
+            });
+            console.log("usuario registrado exitosamente desde el frontend")
+            console.log(res)
+        } catch (error) {
+            console.error("Error al registrar el usuario:", error);
         }
-        const result = usuarioSchema.safeParse(dat);
-        if (!result.success) {
-            console.log(result.error.format());
-        } else {
 
-            console.log(result.data);
-        }
-        console.log("sssssssssssssss")
-        console.log(datos)
     };
 
     return (
@@ -228,14 +227,14 @@ function registro() {
                                 setFormacion(opciones)
                             });
 
-                             obtenerEscalafon().then((dato) => {
+                            obtenerEscalafon().then((dato) => {
                                 const opciones = dato.map((data) => ({
                                     label: data.escalafon,
                                     value: data.id,
                                 }));
                                 setEscalafon(opciones)
                             });
-                             obtenerNivelSalarial().then((dato) => {
+                            obtenerNivelSalarial().then((dato) => {
                                 const opciones = dato.map((data) => ({
                                     label: data.nivel,
                                     value: data.id,
@@ -467,7 +466,7 @@ function registro() {
                             register={register('formacion')}
                             onChange={(e) => {
                                 const value = e.target.value;
-                                
+
                             }}
                             error={errors.formacion}
                         />
@@ -480,7 +479,7 @@ function registro() {
                             register={register('grado_escalafon')}
                             onChange={(e) => {
                                 const value = e.target.value;
-                               
+
                             }}
                             error={errors.grado_escalafon}
                         />
@@ -493,7 +492,7 @@ function registro() {
                             register={register('nivel_salarial')}
                             onChange={(e) => {
                                 const value = e.target.value;
-                                
+
                             }}
                             error={errors.nivel_salarial}
                         />
@@ -506,7 +505,7 @@ function registro() {
                             register={register('nivel_academico', { required: 'Este campo es obligatorio' })}
                             onChange={(e) => {
                                 const value = e.target.value;
-                              
+
                             }}
                             error={errors.nivel_academico}
                         />

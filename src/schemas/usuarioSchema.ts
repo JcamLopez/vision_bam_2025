@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { string, z } from "zod";
 
 
 export const tipoDocumentoEnum = z.enum(['CC', 'TI', 'CE', 'NIT']);
@@ -21,6 +21,7 @@ export const usuarioSchema = z.object({
         .regex(/^\d+$/, { message: "El teléfono solo puede contener números" }),
     rol: rolEnum,
     clave: z.string()
+        .min(8, "La contraseña debe tener al menos 8 caracteres")
         .min(8, "La contraseña debe tener al menos 8 caracteres")
         .regex(/[A-Z]/, "Debe contener al menos una letra mayúscula")
         .regex(/[a-z]/, "Debe contener al menos una letra minúscula")
@@ -57,7 +58,6 @@ export const usuarioSchema = z.object({
 
 })
     .superRefine((data, ctx) => {
-        // Solo validar cuando el rol es ESTUDIANTE
         if (data.rol === "ESTUDIANTE") {
             if (!data.numero_documento_acudiente) {
                 ctx.addIssue({
@@ -140,86 +140,54 @@ export const usuarioSchema = z.object({
                 });
             }
         } else {
-            if (!data.titulo_formacion) {
-                ctx.addIssue({
-                    code: "custom",
-                    path: ["titulo_formacion"],
-                    message: "Debe registrar su formacion",
-                });
+            if (data.rol === "DOCENTE") {
+
+                if (!data.titulo_formacion) {
+                    ctx.addIssue({
+                        code: "custom",
+                        path: ["titulo_formacion"],
+                        message: "Debe registrar su formacion",
+                    });
+                }
+
+                if (!data.formacion) {
+                    ctx.addIssue({
+                        code: "custom",
+                        path: ["formacion"],
+                        message: "Debe seleccionar una formacion",
+                    });
+                }
+
+
+                if (!data.grado_escalafon) {
+                    ctx.addIssue({
+                        code: "custom",
+                        path: ["grado_escalafon"],
+                        message: "Debe seleccionar el escalafon",
+                    });
+                }
+
+
+                if (!data.nivel_salarial) {
+                    ctx.addIssue({
+                        code: "custom",
+                        path: ["nivel_salarial"],
+                        message: "Debe seleccionar el nivel salarial",
+                    });
+                }
+
+
+                if (!data.nivel_academico) {
+                    ctx.addIssue({
+                        code: "custom",
+                        path: ["nivel_academico"],
+                        message: "Debe seleccionar el nivel academico",
+                    });
+                }
             }
 
-            if (!data.formacion) {
-                ctx.addIssue({
-                    code: "custom",
-                    path: ["formacion"],
-                    message: "Debe seleccionar una formacion",
-                });
-            }
-
-
-            if (!data.grado_escalafon) {
-                ctx.addIssue({
-                    code: "custom",
-                    path: ["grado_escalafon"],
-                    message: "Debe seleccionar el escalafon",
-                });
-            }
-
-
-            if (!data.nivel_salarial) {
-                ctx.addIssue({
-                    code: "custom",
-                    path: ["nivel_salarial"],
-                    message: "Debe seleccionar el nivel salarial",
-                });
-            }
-
-
-            if (!data.nivel_academico) {
-                ctx.addIssue({
-                    code: "custom",
-                    path: ["nivel_academico"],
-                    message: "Debe seleccionar el nivel academico",
-                });
-            }
         }
     });
-/* 
-    formacion: z.string().min(1, { message: "La formación es obligatoria" }),
-    titulo_formacion: z.string().min(1, { message: "El municipio es obligatorio" }),
-    grado_escalafon: z.string().min(1, { message: "El municipio es obligatorio" }),
-    nivel_salarial: z.string().min(1, { message: "El municipio es obligatorio" }),
-    nivel_academico: z.string().min(1, { message: "El municipio es obligatorio" }),
-    departamento_acudiente: z.string().optional(),
-    municipio_acudiente: z.string().optional(),
-    barrio_acudiente: z.string().optional(),
-    direccion_acudiente: z.string().optional(),
-    fecha_nacimientos: z.date().optional(),
- 
-    formacion: z.string().min(1, { message: "La formación es obligatoria" }),
-    titulo_formacion: z.string().min(1, { message: "El municipio es obligatorio" }),
-    grado_escalafon: z.string().min(1, { message: "El municipio es obligatorio" }),
-    nivel_salarial: z.string().min(1, { message: "El municipio es obligatorio" }),
-    nivel_academico: z.string().min(1, { message: "El municipio es obligatorio" }),
-    departamento_acudiente: z.string().optional(),
-    municipio_acudiente: z.string().optional(),
-    barrio_acudiente: z.string().optional(),
-    direccion_acudiente: z.string().optional(),
-    fecha_nacimientos: z.date().optional(),
- */
-/* 
-    numero_documento_acudiente: z
-        .string()
-        .length(10, { message: 'El documento debe tener exactamente 10 dígitos' })
-        .regex(/^\d+$/, { message: 'El documento solo puede contener números' })
-        .optional(),
-    n1_acudiente: z.string().optional(),
-    n2_acudiente: z.string().optional(),
-    ap1_acudiente: z.string().optional(),
-    ap2_acudiente: z.string().optional(),
-    correo_acudiente: z.string().optional(),
-    telefono_acudiente: z.string().optional(),
-    parentezco: z.string().optional(), */
-;
+
 
 export type usuarioPayload = z.infer<typeof usuarioSchema>;

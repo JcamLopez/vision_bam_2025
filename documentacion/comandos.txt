@@ -4,3 +4,4 @@ npm install mysql2
 npm install zod
 npm install @hookform/resolvers zod
 npm install --save-dev @types/bcrypt
+npm install bcrypt

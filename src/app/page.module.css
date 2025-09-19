@@ -10,7 +10,6 @@
   width: 20%;
   background-color: transparent;
   justify-self: end;
-  height: 10px;
   animation: bajar 1.5s ease forwards;
 
 }
@@ -18,9 +17,12 @@
 .busqueda ul {
   display: flex;
   gap: 15%;
+    justify-content: center;
+   align-items: center;
 }
 
 .busqueda li {
+  font-family: 'Arial Black', Gadget, sans-serif;
   border: #000000;
   margin: 0%;
   background-color: white;
@@ -29,7 +31,7 @@
   border-bottom-right-radius: 20px;
   color: rgb(0, 0, 0);
   position: relative;
-  left: -45%;
+  left: -35%;
   list-style-type: none;
   white-space: nowrap;
   font-size: 1.5rem;
@@ -50,15 +52,23 @@
 }
 
 .slogan {
+  color: #000000;
+  font-family: 'Arial Black', Gadget, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   background-color: white;
-  height: 15%;
-  width: 40%;
+  height: 12%;
+  width: 50%;
   left: 1%;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
   animation: bajar 1.5s ease forwards;
+}
+.slogan h1{
+  font-size: 35px;
 }
 
 @keyframes bajar {
@@ -83,13 +93,13 @@
   height: 77%;
   width: 100%;
   position: relative;
-  top: 100px;
+  bottom: 0%;
 }
 .medio2{
   color: black;
   position: relative;
   left: 25%;
-  bottom: 26%;
+  bottom: 42%;
   width: 100%;
   background-color: transparent;
   background-size:cover ;

@@ -6,6 +6,7 @@ export default function Page() {
     <div className={style.padre}>
       <div className={style.colegio}>
               <div className={style.slogan}>
+              <h1>Aprender aquí es crecer sin límites</h1>  
       </div>
       <div className={style.busqueda}>
         <ul>

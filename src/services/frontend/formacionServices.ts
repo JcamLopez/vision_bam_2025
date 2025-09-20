@@ -14,8 +14,6 @@ export async function obtenerFormacion(): Promise<{id: number; formacion: string
     }
 
     const data = await response.json();
-    console.log("esta es mi data ")
-    console.log(data)
     return data;
   } catch (error) {
     console.error('Error en formacionService:', error);

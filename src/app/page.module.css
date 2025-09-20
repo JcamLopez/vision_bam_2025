@@ -1,5 +1,6 @@
 .padre {
-  position: relative;
+  position: absolute;
+  background-color: white;
   width: 100%;
   height: 100vh;
 }
@@ -9,7 +10,6 @@
   width: 20%;
   background-color: transparent;
   justify-self: end;
-  height: 10px;
   animation: bajar 1.5s ease forwards;
 
 }
@@ -17,12 +17,21 @@
 .busqueda ul {
   display: flex;
   gap: 15%;
+    justify-content: center;
+   align-items: center;
 }
 
 .busqueda li {
-  margin: 5%;
+  font-family: 'Arial Black', Gadget, sans-serif;
+  border: #000000;
+  margin: 0%;
+  background-color: white;
+    padding: 15px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  color: rgb(0, 0, 0);
   position: relative;
-  left: -45%;
+  left: -35%;
   list-style-type: none;
   white-space: nowrap;
   font-size: 1.5rem;
@@ -32,7 +41,10 @@
 
 .busqueda li:hover {
   margin: 0%;
-  background-color: white;
+  border: white;
+  transform: scale(1.1);
+  background-color: #000000;
+  color: #ffffff;
   padding: 15px;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
@@ -40,15 +52,23 @@
 }
 
 .slogan {
+  color: #000000;
+  font-family: 'Arial Black', Gadget, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   background-color: white;
-  height: 15%;
-  width: 40%;
+  height: 12%;
+  width: 50%;
   left: 1%;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
   animation: bajar 1.5s ease forwards;
+}
+.slogan h1{
+  font-size: 35px;
 }
 
 @keyframes bajar {
@@ -63,31 +83,54 @@
   }
 }
 
-.cabeza {
-  background-color: red;
-  width: 100%;
-}
-
 .medio img {
-  width: 200px;
+  width: 400px;
   height: auto;
 }
 
 .medio {
-  width: 50%;
+  background-size: cover;
+  height: 77%;
+  width: 100%;
   position: relative;
-  left: 5%;
-  top: 100px;
-  background-color: orange;
-}
-
-/* .medio{
-  position: relative;
-  left: 5%;
-  top: 100px;
+  bottom: 0%;
 }
 .medio2{
-  background-color: red;
+  color: black;
   position: relative;
-  left: 35%;
-} */
+  left: 25%;
+  bottom: 42%;
+  width: 100%;
+  background-color: transparent;
+  background-size:cover ;
+}
+@keyframes flickerGold {
+  0%, 7%, 10%, 20%, 25%, 30%, 50%, 55%, 100% {
+    opacity: 1;
+    color: #ffffff;
+    text-shadow:
+      0 0 5px #ffffff,
+      0 0 10px #000000,
+      0 0 20px #ffffff,
+      0 0 40px #ffffff,
+      0 0 80px #ffffff;
+  }
+  5%, 8%, 15%, 22%, 27%, 52%, 57% {
+    opacity: 0.3;
+    text-shadow: none;
+  }
+}
+
+.medio2 h1{
+  font-family: 'Arial Black', Gadget, sans-serif;
+  font-size: 80px;
+  animation: flickerGold 3s forwards;
+
+}
+.colegio{
+  width: 100%;
+  height: 90%;
+  background-image: url(/img/colegio.png);
+  background-size: cover;
+}
+

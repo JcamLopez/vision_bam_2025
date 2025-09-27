@@ -4,6 +4,12 @@ CREATE DATABASE COLEGIO3;
 
 USE DATABASE COLEGIO3;
 
+create table MATERIA(
+    id_materia int(10) AUTO_INCREMENT PRIMARY key not null,
+    nombre varchar(50) not null,
+    estado boolean not null 
+    );
+
 CREATE TABLE TIPO_DOCUMENTO (
   TIPO VARCHAR(50)  PRIMARY KEY,
   ESTADO BOOLEAN NOT NULL,

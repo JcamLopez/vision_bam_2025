@@ -12,8 +12,8 @@ export async function POST(req:Request) {
       { status: 400 }
     );
   }
-        const mision = await registroVision(validacion.data);
-        return NextResponse.json(mision);
+        const vision = await registroVision(validacion.data);
+        return NextResponse.json(vision);
     } catch (error) {
         return NextResponse.json({ error: 'Error interno del servidor' }, { status: 500 });
     }

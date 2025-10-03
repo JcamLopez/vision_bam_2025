@@ -22,6 +22,8 @@ export async function registrarUsuario(data: usuarioPayload) {
         await usuario(data, connection);
         if (data.rol === "DOCENTE") {
             RegistroDocente(data, connection)
+        } else if (data.rol === "ESTUDIANTE") {
+
         }
         await connection.commit();
         return { mensaje: "Registro exitoso" };

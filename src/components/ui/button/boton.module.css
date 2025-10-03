@@ -1,17 +1,13 @@
 .botonInstitucional {
-  background-color: #004080; /* Azul institucional */
-  color: #ffffff;
-  padding: 0.6rem 1.2rem;
-  border: none;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    color: rgb(255, 255, 255);
+    border-radius: 6px;
+    cursor: pointer;
+    background-color:#6d0000;
 }
 
 .botonInstitucional:hover {
-  background-color: #0059b3; /* Azul más claro al pasar el mouse */
+  background-color: #490000;;
+  color: white; 
 }
 
 .botonInstitucional:disabled {

@@ -7,7 +7,7 @@ type InputProps = {
   type?: string;
   placeholder?: string;
   className?: string;
-  register: UseFormRegisterReturn;
+  register?: UseFormRegisterReturn;
   error?: FieldError;
 };
 

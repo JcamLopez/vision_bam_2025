@@ -10,13 +10,13 @@ export default function Page() {
       </div>
       <div className={style.busqueda}>
         <ul>
-          <li>Iniciar Sesion</li>
-          <li>Registro</li>
+          <a href="http://localhost:3000/auth/login"><li>Iniciar Sesion</li></a>
+          <a href="http://localhost:3000/auth/registro"><li>Registro </li></a>
         </ul>
       </div>
-        <div className={style.medio}><img src="./img/escudo_bam.png" alt="" /></div>
+        <div className={style.medio}><img src="/img/escudo_bam.png" alt="" /></div>
         <div className={style.medio2}>
-          <h1>Bernardo Arango Macias</h1>
+          <h1>Bernardo Arango Macias </h1>
         </div>
         
       </div>
@@ -31,7 +31,7 @@ export default function Page() {
         <div className={style.publicacion}>
           <h1>aqui van las publicaciones</h1>
         </div>
-        <div className={style.img_real}><img src="./img/escudo_minimalista.png" alt="" />
+        <div className={style.img_real}><img src="/img/escudo_minimalista.png" alt="" />
         <h1>BAM</h1></div>
         <div className={style.fecha}>
           <h2>00/00/0000</h2>

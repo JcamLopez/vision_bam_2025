@@ -1,6 +1,6 @@
 .padre {
   position: absolute;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   width: 100%;
   height: 100vh;
 }
@@ -133,4 +133,95 @@
   background-image: url(/img/colegio.png);
   background-size: cover;
 }
+.index{
+  background-color: transparent;
+  width: 100%;
+  height: 100vh;
+  color: #000000;
+  background-color: #ffffff;
+}
+.menu{
+  position: fixed;
+  top: 30%;
+  width: 12%;
+  height: 35%;
+  background-color: #ffffff;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 1);
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px ;
+  left: -145px;
+  transition: left 0.3s ease;
+}
+.menu:hover{
+  left: 0;
+}
+.index ul{
 
+  height:100% ;
+  color: rgb(0, 0, 0);
+  font-size: 28px;
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  gap: 8%;
+
+}
+.index li{
+  position: relative;
+  top: 18%;
+  cursor: pointer;
+}
+.index li:hover{ 
+  color: #ffffff;
+  background-color: black;
+
+}
+.publicacion{
+  border-radius: 20px;
+  width: 26%;
+  height: 95%;
+  background-color: rgb(0, 0, 0);
+  position: relative;
+  margin: 3%;
+  left: 50%;
+  transform: translate(-50%);
+}
+.img_real{
+  display: flex;
+  position: relative;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 1);
+  border-top-left-radius: 40px;
+  border-bottom-left-radius:40px ;
+  bottom:95%;
+  width: 200px;
+  left: 26.9%;
+  background-color: white;
+}
+.img_real img{
+  position: relative;
+  width: 80px;
+  height: auto;
+
+}
+.img_real h1{
+  position: absolute;
+  left: 45%;
+  top: 18%;
+}
+.fecha{
+  display: flex;
+  position: relative;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 1);
+  border-top-left-radius: 40px;
+  border-bottom-left-radius:40px ;
+  bottom:85%;
+  width: 200px;
+  left: 26.9%;
+  background-color: white;
+}
+.fecha h2{
+  position: relative;
+  left: 15%;
+  top: 4px;
+  background-color: transparent;
+}

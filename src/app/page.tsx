@@ -20,6 +20,23 @@ export default function Page() {
         </div>
         
       </div>
+      <div className={style.index}>
+        <div className={style.menu}>
+          <ul>
+            <li>Misión</li>
+            <li>Visión</li>
+            <li>Nosotros</li>
+          </ul>
+        </div>
+        <div className={style.publicacion}>
+          <h1>aqui van las publicaciones</h1>
+        </div>
+        <div className={style.img_real}><img src="./img/escudo_minimalista.png" alt="" />
+        <h1>BAM</h1></div>
+        <div className={style.fecha}>
+          <h2>00/00/0000</h2>
+        </div>
+      </div>
     </div>
   )
 }

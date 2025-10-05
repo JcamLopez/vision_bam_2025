@@ -2,7 +2,7 @@
 import { db } from '@/libs/db';
 export async function obtenerEscalafon() {
     try {
-        const [rows] = await db.query('SELECT E.ID_ESCALAFON AS ID, E.ESCALAFON AS ES , E.ESTADO AS ESTA FROM ESCALAFON AS E');
+        const [rows] = await db.query('SELECT E.ID_GRADO_ESCALAFON AS ID, E.GRADO_ESCALAFON AS ES , E.ESTADO AS ESTA FROM  GRADO_ESCALAFON AS E');
         const formacion = (rows as any[]).map((row) => ({
             id: row.ID,
             escalafon: row.ES,

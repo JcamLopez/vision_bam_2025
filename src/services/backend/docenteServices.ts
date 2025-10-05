@@ -7,13 +7,13 @@ export async function RegistroDocente(data: usuarioPayload, connection: PoolConn
 
 
     await connection.execute(
-        'INSERT INTO DOCENTE (FK_PERSONA,FK_FORMACION,FK_ESCALAFON,FK_NIVEL_SALARIAL,FK_NIVEL_ACADEMICO,TITULO,ESTADO) VALUES (?,?, ?,?,?,?,?)',
+        'INSERT INTO DOCENTE (FK_PERSONA,FK_GRADO_ESCALAFON,FK_NIVEL_SALARIAL,FK_NIVEL_ACADEMICO,FK_FORMACION,TITULO,ESTADO) VALUES (?,?, ?,?,?,?,?)',
         [
             data.doc,
-            data.formacion,
             data.grado_escalafon,
             data.nivel_salarial,
             data.nivel_academico,
+            data.formacion,
             data.titulo_formacion,
             1
         ]

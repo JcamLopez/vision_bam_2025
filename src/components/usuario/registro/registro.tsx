@@ -106,6 +106,8 @@ function registro() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(datos),
             });
+            console.log("registroooooooooo")
+            console.log(res)
             console.log("usuario registrado exitosamente desde el frontend")
             console.log(res)
         } catch (error) {
@@ -502,7 +504,7 @@ function registro() {
                             label="Nivel academico"
                             name="nivel_academico"
                             options={nivel_academico}
-                            register={register('nivel_academico', { required: 'Este campo es obligatorio' })}
+                            register={register('nivel_academico')}
                             onChange={(e) => {
                                 const value = e.target.value;
 

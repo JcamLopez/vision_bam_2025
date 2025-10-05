@@ -23,9 +23,10 @@ export default function Page() {
       <div className={style.index}>
         <div className={style.menu}>
           <ul>
-            <li>Misión</li>
-            <li>Visión</li>
-            <li>Nosotros</li>
+            <a href="http://localhost:3000/auth/mision_y_vision"><li>Misión</li></a>
+            <a href="http://localhost:3000/auth/mision_y_vision"><li>Visión</li></a>
+            <a href="http://localhost:3000/auth/Nosotros"><li>Nosotros</li></a>
+            <a href="https://iebam.edu.co/wp-content/uploads/2020/10/manual-de-convivencia.pdf" target='blank'><li>Manual</li></a>
           </ul>
         </div>
         <div className={style.publicacion}>

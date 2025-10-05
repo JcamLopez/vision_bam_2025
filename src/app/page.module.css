@@ -24,18 +24,17 @@
 .busqueda li {
   font-family: 'Arial Black', Gadget, sans-serif;
   border: #000000;
-    box-shadow: 4px 4px 10px black;
   margin: 0%;
-  background-color: #6d0000;;
+   background-color: rgba(128, 0, 0, 0.8); 
     padding: 15px;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   color: white;
   position: relative;
-  left: -35%;
+  left: -70%;
   list-style-type: none;
   white-space: nowrap;
-  font-size: 1.5rem;
+  font-size: 1rem;
   transition: all 0.3s ease;
   cursor: pointer;
 }
@@ -59,17 +58,16 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  background-color: #6d0000;;
-  height: 12%;
-  width: 50%;
-  left: 1%;
+  background-color: rgba(128, 0, 0, 0.7); 
+  height: 8%;
+  width: 30%;
+  left: 3%;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-  box-shadow: 4px 4px 10px rgb(0, 0, 0);
   animation: bajar 1.5s ease forwards;
 }
 .slogan h1{
-  font-size: 35px;
+  font-size: 1.2rem;
 }
 
 @keyframes bajar {
@@ -87,6 +85,7 @@
 .medio img {
   width: 400px;
   height: auto;
+  animation: flickerGold 3s forwards;
 }
 
 .medio {
@@ -125,6 +124,7 @@
 .medio2 h1{
   font-family: 'Arial Black', Gadget, sans-serif;
   font-size: 80px;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
   animation: flickerGold 3s forwards;
 
 }
@@ -133,6 +133,19 @@
   height: 90%;
   background-image: url(/img/colegio.png);
   background-size: cover;
+}
+
+.colegio::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(0,0,0,0.6),  /* más oscuro arriba */
+    rgba(0,0,0,0.3),  /* medio en el centro */
+    rgba(0,0,0,0.6)   /* más oscuro abajo */
+  );
+  z-index: -1;
+  pointer-events: none;
 }
 .index{
   background-color: transparent;
@@ -143,16 +156,25 @@
 }
 .menu{
   position: fixed;
-  top: 30%;
+  top: 20%;
   width: 12%;
-  height: 35%;
-  background-color: #6d0000;
-    box-shadow: 4px 4px 10px rgb(0, 0, 0);
+  height: 60%;
+  background-color: rgba(128, 0, 0,0.8);  
   border-bottom-right-radius: 20px;
   border-top-right-radius: 20px ;
   left: -145px;
   transition: left 0.3s ease;
+  animation: aparecerMenu 1.2s ease-in-out;
 }
+@keyframes aparecerMenu {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+
 .menu:hover{
   left: 0;
 }
@@ -167,12 +189,17 @@
   gap: 8%;
 
 }
-.index li{
+.menu a{
+  width: 135%;
+  right: 35%;
+  text-align:center;
   position: relative;
   top: 18%;
   cursor: pointer;
 }
-.index li:hover{ 
+.menu a:hover{ 
+  text-align: center;
+  width: 135%;
   color: #ffffff;
   background-color: #490000;
 
@@ -197,7 +224,7 @@
   bottom:95%;
   width: 200px;
   left: 26.9%;
-  background-color: #6d0000;;
+  background-color: rgba(128, 0, 0,0.9); 
 }
 .img_real img{
   position: relative;
@@ -220,7 +247,7 @@
   width: 200px;
   left: 26.9%;
   color: white;
-  background-color: #6d0000;
+  background-color: rgba(128, 0, 0,0.9); 
 }
 .fecha h2{
   position: relative;

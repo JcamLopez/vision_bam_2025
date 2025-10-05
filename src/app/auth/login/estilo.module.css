@@ -15,11 +15,12 @@
 }
 .login_img{
     position: absolute;
-    bottom: 70%;
+    bottom: 72%;
 }
 .login_img img{
     width: 150px;
     height: auto;
+    border-radius: 100%;
 }
 .contenedor_login h2{
     position: absolute;

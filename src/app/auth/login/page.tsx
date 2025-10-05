@@ -8,10 +8,10 @@ export default function page() {
     <div className={estilo.padre} >
       <div className={estilo.fondo}><img src="/img/colegio2.jpg" alt="cargando" /></div>
       <div className={estilo.contenedor_login}>
-        <div className={estilo.login_img}><img src="/img/login.png" alt="cargando" /></div>
+        <div className={estilo.login_img}><img src="/img/escudo_login.png" alt="cargando" /></div>
         <h2>Iniciar Sesión</h2>
         <div className={estilo.login}>
-          <Input label='usuario' name='Usuario' type='text' placeholder='Usuario' />
+          <Input label='Nombre' name='Nombre' type='text' placeholder='Nombre' />
           <Input label='contraseña' name='Contraseña' type='text' placeholder='Contraseña'/>
           <Boton nombre="Iniciar Sesión"className={estilo.Iniciar}/>
         </div>

@@ -8,7 +8,8 @@ import { registro_correo } from './correoServices'
 import { registro_telefono } from './telefonoServices'
 import { registro_ubicacion } from './ubicacionServices'
 import { RegistroDocente } from './docenteServices'
-
+import { RegistroEstudiante } from './estudianteServices'
+import { RegistroAcudiente, RegistroPersonaPersonaAcudiente, registro_correo_acudiente, registro_ubicacion_acudiente, registro_telefono_acudiente } from './acudienteServices'
 
 export async function registrarUsuario(data: usuarioPayload) {
     const connection = await db.getConnection();
@@ -22,10 +23,17 @@ export async function registrarUsuario(data: usuarioPayload) {
         await usuario(data, connection);
         if (data.rol === "DOCENTE") {
             RegistroDocente(data, connection)
-
         } else if (data.rol === "ESTUDIANTE") {
-
+            RegistroEstudiante(data, connection)
+            RegistroPersonaPersonaAcudiente(data, connection)
+            registro_correo_acudiente(data, connection)
+            registro_ubicacion_acudiente(data, connection)
+            RegistroAcudiente(data, connection)
+            registro_telefono_acudiente(data, connection)
+        } else {
+            console.log("no entro ni al estudiante ni al docente")
         }
+
         await connection.commit();
         return { mensaje: "Registro exitoso" };
     } catch (error: any) {
@@ -55,3 +63,4 @@ async function usuario(data: usuarioPayload, connection: PoolConnection) {
         ]
     );
 }
+

@@ -1,0 +1,68 @@
+.padre{
+    background-color: white;
+    height:100vh;
+    width: 100%;
+
+}
+.contenedor_login{
+    width: 30%;
+    height: 100vh;
+    box-shadow: 4px 4px 10px  rgba(0 ,0, 0, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+.login_img{
+    position: absolute;
+    bottom: 72%;
+}
+/* .login_img img{
+    width: 150px;
+    height: auto;
+    border-radius: 100%;
+} */
+.login_img img{
+    width: 350px;
+    height: auto;
+    border-radius: 100%;
+}
+
+.contenedor_login h2{
+    position: absolute;
+    bottom: 60%;
+}
+.login {
+    position: relative;
+    top: 12%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+
+}
+.login input{
+    width: 350px;
+    height: 45px;
+}
+.Usuario{
+    position: absolute;
+    right: 92.9%;
+    bottom: 54%;
+
+}
+.Iniciar{
+    position: relative;
+    top: 10px;
+    width: 350px;
+    height: 45px;
+}
+.fondo{
+    position: absolute;
+    bottom: 0px;
+    left: 30%;
+}
+.fondo img{
+    width: 110%;
+    height: 100%;
+}

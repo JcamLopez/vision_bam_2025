@@ -6,19 +6,24 @@ export async function POST(req: Request) {
 
 
   try {
+
     const body = await req.json();
+    console.log(body)
     const validacion = usuarioSchema.safeParse(body);
     if (!validacion.success) {
+      console.dir(validacion.error.format(), { depth: null });
+
       return NextResponse.json(
         { error: "Datos inválidos", detalles: validacion.error.format() },
         { status: 400 }
       );
     }
+  
     const resultado = await registrarUsuario(validacion.data);
-    console.log("USUARIO REGISTRADO CON EXITO")
+
     return NextResponse.json({ mensaje: "Usuario registrado", resultado });
   } catch (error: any) {
-    console.log("error al registrar el usuario")
+    console.error("Detalle del error:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 

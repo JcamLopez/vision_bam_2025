@@ -44,7 +44,8 @@ export const usuarioSchema = z.object({
     telefono_acudiente: z.string().optional(),
     correo_acudiente: z.string().optional(),
     parentezco: z.string().optional(),
-    fecha_nacimiento: z.date().optional(),
+    /*  fecha_nacimiento: z.string().optional(), */
+    grado: z.string().optional(),
     departamento_acudiente: z.string().optional(),
     municipio_acudiente: z.string().optional(),
     barrio_acudiente: z.string().optional(),
@@ -80,13 +81,15 @@ export const usuarioSchema = z.object({
                     message: "El primer apellido del acudiente es obligatorio",
                 });
             }
-            if (!data.telefono_acudiente) {
+            const tel = data.telefono_acudiente?.trim();
+            if (!tel || !/^\d{10}$/.test(tel)) {
                 ctx.addIssue({
                     code: "custom",
                     path: ["telefono_acudiente"],
-                    message: "El teléfono del acudiente es obligatorio",
+                    message: "El teléfono del acudiente debe tener exactamente 10 dígitos numéricos",
                 });
             }
+
             if (!data.correo_acudiente) {
                 ctx.addIssue({
                     code: "custom",
@@ -101,13 +104,13 @@ export const usuarioSchema = z.object({
                     message: "El parentesco es obligatorio",
                 });
             }
-            if (!data.fecha_nacimiento) {
-                ctx.addIssue({
-                    code: "custom",
-                    path: ["fecha_nacimiento"],
-                    message: "La fecha de nacimiento es obligatoria",
-                });
-            }
+            /*   if (!data.fecha_nacimiento) {
+                  ctx.addIssue({
+                      code: "custom",
+                      path: ["fecha_nacimiento"],
+                      message: "La fecha de nacimiento es obligatoria",
+                  });
+              } */
             if (!data.departamento_acudiente) {
                 ctx.addIssue({
                     code: "custom",

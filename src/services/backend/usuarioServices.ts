@@ -22,6 +22,7 @@ export async function registrarUsuario(data: usuarioPayload) {
         await usuario(data, connection);
         if (data.rol === "DOCENTE") {
             RegistroDocente(data, connection)
+
         } else if (data.rol === "ESTUDIANTE") {
 
         }
@@ -44,7 +45,7 @@ async function usuario(data: usuarioPayload, connection: PoolConnection) {
     const id_rol = resultado.id
     const hash = await bcrypt.hash(data.clave, 12);
     await connection.execute(
-        'INSERT INTO USUARIO (FK_PERSONA,FK_ROL,USUARIO,CLAVE,ESTADO) VALUES (?, ?,?,?,?)',
+        'INSERT INTO USUARIO (FK_PERSONA,ID_ROL,USUARIO,CLAVE,ESTADO) VALUES (?, ?,?,?,?)',
         [
             data.doc,
             id_rol,

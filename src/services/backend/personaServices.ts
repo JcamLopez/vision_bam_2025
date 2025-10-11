@@ -6,7 +6,7 @@ export async function reigstro_persona(data: usuarioPayload, connection: PoolCon
     const resultado = await obtenerGeneroPorNombre(data.genero)
     const id_genero = resultado.id
     await connection.execute(
-        'INSERT INTO PERSONA (DOCUMENTO,ID_TIPO_DOCUMENTO,ID_INSTITUCION,FK_GENERO, N1, N2, AP1, AP2) VALUES (?, ?, ?, ?, ?, ?, ?,?)',
+        'INSERT INTO PERSONA (DOCUMENTO,ID_TIPO_DOCUMENTO,ID_INSTITUCION,ID_GENERO, N1, N2, AP1, AP2) VALUES (?, ?, ?, ?, ?, ?, ?,?)',
         [
             data.doc,
             data.tipo,

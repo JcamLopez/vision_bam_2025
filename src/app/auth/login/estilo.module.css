@@ -25,6 +25,7 @@
 .contenedor_login h2{
     position: absolute;
     bottom: 60%;
+    color: rgba(128, 0, 0,1);
 }
 .login {
     position: relative;

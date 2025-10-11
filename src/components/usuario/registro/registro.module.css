@@ -8,11 +8,12 @@
     justify-content: center;
     align-items: center;
     grid-column: 1/-1;
+
 }
 
 .titulo_h2 {
     grid-column: 1/-1;
-
+    text-shadow: 0 2px 4px rgba(109, 0, 0, 0.5);
 }
 
 .card {
@@ -22,6 +23,7 @@
     top: 50px;
     bottom: 50px;
     transform: translateX(-50%);
+    box-shadow: 0 4px 12px rgba(109, 0, 0, 0.9);
 }
 
 .container_img {
@@ -34,7 +36,7 @@
 .boton {
     width: 100%;
     grid-column: 1/-1;
-    
+
 }
 
 /* Teléfono pequeño: 1 columna, 1 fila */
@@ -63,4 +65,42 @@
     .formGrid {
         grid-template-columns: repeat(4, 1fr);
     }
+}
+
+.succes-user {
+    background-color: #e6f9ed;
+    color: #2e7d32;
+    border: 1px solid #b2dfdb;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(46, 125, 50, 0.2);
+    transition: opacity 0.3s ease-in-out;
+    margin-top: 12px;
+    grid-column: 1/-1;
+
+}
+
+.error-user {
+    background-color: #fdecea;
+    color: #c62828;
+    border: 1px solid #f5c6cb;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(198, 40, 40, 0.2);
+    transition: opacity 0.3s ease-in-out;
+    margin-top: 12px;
+    grid-column: 1/-1;
+}
+
+.texto_span {
+    color: rgba(109, 0, 0, 0.9);
+
+}
+
+.textos {
+    text-shadow: 0 2px 4px rgba(109, 0, 0, 0.8);
 }

@@ -16,10 +16,15 @@ export default function Card({
 
 
     return (
-        <div className={`card ${appliedSizeClass} ${className ?? ''} ${styles.card}`}  >
+      /*   <div className={`card ${appliedSizeClass} ${className ?? ''} ${styles.card}`}  >
             <div className="card-body">
                 {children}
             </div>
-        </div>
+        </div> */
+         <div className={`card ${styles.card}`}  >
+            <div className="card-body">
+                {children}
+            </div>
+        </div> 
     );
 }

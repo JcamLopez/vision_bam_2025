@@ -3,19 +3,17 @@
 import { usuarioPayload } from '@/schemas/usuarioSchema'
 import { PoolConnection } from "mysql2/promise";
 
-export async function RegistroDocente(data: usuarioPayload, connection: PoolConnection) {
+export async function RegistroEstudiante(data: usuarioPayload, acudiente: number, connection: PoolConnection) {
 
 
     await connection.execute(
-        'INSERT INTO DOCENTE (FK_PERSONA,FK_FORMACION,FK_ESCALAFON,FK_NIVEL_SALARIAL,FK_NIVEL_ACADEMICO,TITULO,ESTADO) VALUES (?,?, ?,?,?,?,?)',
+        'INSERT INTO ESTUDIANTE (ID_ACUDIENTE,ID_PERSONA,ID_GRADO,FECHA_NACIMIENTO,ESTADO) VALUES (?,?, ?,?,?)',
         [
+            acudiente,
             data.doc,
-            data.formacion,
-            data.grado_escalafon,
-            data.nivel_salarial,
-            data.nivel_academico,
-            data.titulo_formacion,
-            1
+            data.grado,
+            '2025-05-05',
+            3
         ]
     );
 

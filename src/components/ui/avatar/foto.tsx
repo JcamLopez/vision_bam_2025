@@ -3,7 +3,7 @@ import { AvatarUploadProps } from '@/types/ui/avatar'
 import { useRef, useState } from 'react';
 import styles from './avatar.module.css'
 
-export default function Avatar({ initialSrc }: AvatarUploadProps) {
+export default function     Avatar({ initialSrc }: AvatarUploadProps) {
 
     const [imageSrc, setImageSrc] = useState(initialSrc || '');
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -26,7 +26,7 @@ export default function Avatar({ initialSrc }: AvatarUploadProps) {
     return (
         <div className={styles["avatar-upload-container"]} onClick={handleClick}>
             <img
-                src={imageSrc || '/img/hombre_mujer.png'}
+                src={imageSrc || '/img/avatar_colegio.jpeg'}
                 alt="Foto de perfil"
                 className={styles["avatar-image"]}
             />

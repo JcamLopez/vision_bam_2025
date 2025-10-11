@@ -17,11 +17,17 @@
     position: absolute;
     bottom: 72%;
 }
-.login_img img{
+/* .login_img img{
     width: 150px;
     height: auto;
     border-radius: 100%;
+} */
+.login_img img{
+    width: 350px;
+    height: auto;
+    border-radius: 100%;
 }
+
 .contenedor_login h2{
     position: absolute;
     bottom: 60%;

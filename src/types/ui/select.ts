@@ -62,3 +62,9 @@ export type SelectNivelAcademico = {
   label: string;
   value: number;
 };
+
+export type Grado = {
+  label: string;
+  value: number;
+};
+

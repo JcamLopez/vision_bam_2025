@@ -12,6 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 
+
 import { obtenerTiposDeDocumento } from '@/services/frontend/tipo_documentoSevices';
 import { obtenerGenero } from '@/services/frontend/generoServices';
 import { obtenerRol } from '@/services/frontend/rolServices';
@@ -21,7 +22,11 @@ import { obtenerFormacion } from '@/services/frontend/formacionServices'
 import { obtenerEscalafon } from '@/services/frontend/escalafonServices'
 import { obtenerNivelAcademico } from '@/services/frontend/nivelAcademicoServices'
 import { obtenerNivelSalarial } from '@/services/frontend/nivelSalarialServices'
-import { SelectipoDocumento, SelectDepartamento, SelectGenero, SelectRol, SelectMunicipio, SelectFormacion, SelectEscalafon, SelectNivelSalarial, SelectNivelAcademico } from '@/types/ui/select';
+import { obtenerGrados } from '@/services/frontend/gradosServices'
+import { SelectipoDocumento, SelectDepartamento, SelectGenero, SelectRol, SelectMunicipio, SelectFormacion, SelectEscalafon, SelectNivelSalarial, SelectNivelAcademico, Grado } from '@/types/ui/select';
+import { useRouter } from 'next/navigation';
+
+
 
 
 function registro() {
@@ -35,7 +40,10 @@ function registro() {
     const [escalafon, setEscalafon] = useState<SelectEscalafon[]>([]);
     const [nivel_salarial, setNivelSalarial] = useState<SelectNivelSalarial[]>([]);
     const [nivel_academico, setNivelAcademico] = useState<SelectNivelAcademico[]>([]);
-
+    const [grado, setGrado] = useState<Grado[]>([]);
+    const [succes, setSucces] = useState("");
+    const [error, setError] = useState("");
+    const router = useRouter();
     const [rol, setRol] = useState<string>('');
 
 
@@ -71,7 +79,12 @@ function registro() {
             }));
             setDepartamentos(opciones)
         });
+
+
     }, []);
+
+
+
 
 
     const {
@@ -87,40 +100,44 @@ function registro() {
         console.log("Errores actuales:", errors);
     }, [errors]);
 
-    const onSubmitForm = async (datos: usuarioPayload) => {
+   const onSubmitForm = async (datos: usuarioPayload) => {
         try {
-            const dat = {
-                ...datos,
-                fecha_nacimiento: datos.fecha_nacimiento
-                    ? new Date(datos.fecha_nacimiento)
-                    : undefined,
-            }
-            const result = usuarioSchema.safeParse(dat);
-            if (!result.success) {
-                console.log(result.error.format());
-            } else {
-                console.log(result.data);
-            }
             const res = await fetch("/api/usuario", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(datos),
             });
-            console.log("registroooooooooo")
-            console.log(res)
-            console.log("usuario registrado exitosamente desde el frontend")
-            console.log(res)
-        } catch (error) {
-            console.error("Error al registrar el usuario:", error);
-        }
 
+            const data = await res.json();
+            console.log("Respuesta del backend:");
+            console.dir(data, { depth: null });
+
+            if (res.ok) {
+                setSucces("Solicitud de registro exitosa");
+                setTimeout(() => {
+                    router.push("/")
+                }, 3000)
+            } else {
+                console.error(" Error del backend:", data.error);
+                if (data.detalles) {
+                    console.dir(data.detalles, { depth: null }); 
+                }
+                setError("No se pudo registrar el usuario " + data.error);
+            }
+        } catch (error: any) {
+            console.error("Error inesperado al registrar el usuario:", error.message || error);
+            setError("Error inesperado. Intenta nuevamente.");
+        }
     };
 
-    return (
+
+    return (<>
+
+
         <Card className={style.card}>
             <form className={style.formGrid} onSubmit={handleSubmit(onSubmitForm)}  >
                 <div className={style.titulo}>
-                    <h1>Registro persona</h1>
+                    <h1 className={style.textos}> <span className={style.texto_span}>Reg</span>istro persona</h1>
                 </div>
 
                 <div className={style.container_img}>
@@ -251,6 +268,15 @@ function registro() {
                                 }));
                                 setNivelAcademico(opciones)
                             });
+                        } else if (value === "ESTUDIANTE") {
+                            obtenerGrados().then((dato) => {
+                                const opciones = dato.map((data) => ({
+                                    label: data.grado,
+                                    value: data.id
+                                }));
+                                setGrado(opciones)
+                            });
+
                         }
                     }}
                     error={errors.rol}
@@ -315,13 +341,11 @@ function registro() {
                     <>
                         <h2 className={style.titulo_h2}>Datos del estudiante </h2>
 
-
-                        <Input
-                            label="Fecha de nacimiento"
-                            name="fecha_nacimiento"
-                            type='date'
-                            register={register('fecha_nacimiento', { valueAsDate: true })}
-                            error={errors.fecha_nacimiento}
+                        <Select
+                            label="Grado"
+                            name="grado"
+                            options={grado}
+                            register={register('grado')}
 
                         />
 
@@ -520,10 +544,16 @@ function registro() {
 
                 <Button type="submit" nombre='Registrar' className={style.boton} />
 
-
-
+                {/* {succes && <p className={style['succes-user']}>{succes}</p>} */}
+                {succes ? (
+                    <p className={style['succes-user']}>{succes}</p>
+                ) : error && (
+                    <p className={style['error-user']}>{error}</p>
+                )}
             </form>
         </Card>
+    </>
+
 
 
 

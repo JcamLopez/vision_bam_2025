@@ -47,7 +47,7 @@ export async function registro_correo_acudiente(data: usuarioPayload, connection
     );
 }
 
-export async function RegistroAcudiente(data: usuarioPayload, connection: PoolConnection) {
+/* export async function RegistroAcudiente(data: usuarioPayload, connection: PoolConnection) {
     await connection.execute(
         'INSERT INTO ACUDIENTE (FK_PERSONA,PARENTESCO,ESTADO) VALUES (?,?,?)',
         [
@@ -56,6 +56,22 @@ export async function RegistroAcudiente(data: usuarioPayload, connection: PoolCo
             1
         ]
     );
+} */
+export async function RegistroAcudiente(data: usuarioPayload, connection: PoolConnection) {
+    const [result] = await connection.execute(
+        'INSERT INTO ACUDIENTE (FK_PERSONA, PARENTESCO, ESTADO) VALUES (?, ?, ?)',
+        [
+            data.numero_documento_acudiente,
+            data.parentezco,
+            1
+        ]
+    );
+
+    // El id insertado está en result.insertId
+    const insertId = (result as any).insertId;
+
+    console.log('ID del acudiente insertado:', insertId);
+    return insertId;
 }
 export async function registro_telefono_acudiente(data: usuarioPayload, connection: PoolConnection) {
     await connection.execute(

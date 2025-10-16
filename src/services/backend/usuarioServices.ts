@@ -24,7 +24,6 @@ export async function registrarUsuario(data: usuarioPayload) {
         if (data.rol === "DOCENTE") {
             RegistroDocente(data, connection)
         } else if (data.rol === "ESTUDIANTE") {
-
             await RegistroPersonaPersonaAcudiente(data, connection)
             await registro_correo_acudiente(data, connection)
             await registro_ubicacion_acudiente(data, connection)
@@ -60,7 +59,7 @@ async function usuario(data: usuarioPayload, connection: PoolConnection) {
             id_rol,
             data.doc,
             hash,
-            1
+            "PENDIENTE"
         ]
     );
 }

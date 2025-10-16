@@ -1,68 +1,91 @@
-.padre{
-    background-color: white;
-    height:100vh;
-    width: 100%;
-
-}
-.contenedor_login{
-    width: 30%;
-    height: 100vh;
-    box-shadow: 4px 4px 10px  rgba(0 ,0, 0, 1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-}
-.login_img{
-    position: absolute;
-    bottom: 72%;
-}
-/* .login_img img{
-    width: 150px;
-    height: auto;
-    border-radius: 100%;
-} */
-.login_img img{
-    width: 350px;
-    height: auto;
-    border-radius: 100%;
+.contenedor {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.contenedor_login h2{
-    position: absolute;
-    bottom: 60%;
+/* Fondo difuminado */
+.fondo {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url('/img/colegio2.jpg') center/cover no-repeat;
+  filter: blur(8px) brightness(0.7);
+  z-index: 0;
 }
-.login {
-    position: relative;
-    top: 12%;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
 
+/* Tarjeta de login */
+.tarjeta {
+  position: relative;
+  z-index: 1;
+  width: 400px;
+  padding: 50px 40px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  backdrop-filter: blur(5px);
+}
 
-}
-.login input{
-    width: 350px;
-    height: 45px;
-}
-.Usuario{
-    position: absolute;
-    right: 92.9%;
-    bottom: 54%;
+.logo {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  border: 3px solid #490000;
+  object-fit: cover;
+} 
 
+.titulo {
+  font-size: 1.8rem;
+  color: #490000;
+  margin-bottom: 30px;
+  font-weight: 600;
 }
-.Iniciar{
-    position: relative;
-    top: 10px;
-    width: 350px;
-    height: 45px;
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 100%;
 }
-.fondo{
-    position: absolute;
-    bottom: 0px;
-    left: 30%;
+
+.formulario input {
+  width: 100%;
+  height: 45px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: border-color 0.3s;
 }
-.fondo img{
-    width: 110%;
-    height: 100%;
+
+.formulario input:focus {
+  border-color: #490000;
+  outline: none;
+}
+
+.boton {
+  width: 100%;
+  height: 45px;
+  background-color: #2C3E50;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  transition: 0.3s ease;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.boton:hover {
+  background-color: #4A90E2;
+  transform: scale(1.03);
 }

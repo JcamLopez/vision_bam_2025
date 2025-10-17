@@ -1,4 +1,11 @@
+
+
 import { loginPayload } from '@/schemas/loginSchema';
+
+export interface Permiso {
+  nombre: string;
+  ruta: string;
+}
 
 export interface UsuarioAutenticado {
   id: number;
@@ -8,10 +15,12 @@ export interface UsuarioAutenticado {
   documento: string;
   nombres: string;
   apellidos: string;
-  permisos: string[]; 
+  permisos: Permiso[];
 }
 
-export async function loginCliente(datos: loginPayload): Promise<{
+export async function loginCliente(
+  datos: loginPayload
+): Promise<{
   resultado: {
     mensaje: string;
     usuario: UsuarioAutenticado;
@@ -35,5 +44,3 @@ export async function loginCliente(datos: loginPayload): Promise<{
     return null;
   }
 }
-
-

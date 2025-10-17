@@ -3,7 +3,7 @@ import { db } from '@/libs/db';
 
 
 
-  export async function SolicitudEstudiante() {
+export async function SolicitudEstudiante() {
   try {
     const [rows] = await db.query(`
       SELECT 
@@ -96,7 +96,7 @@ import { db } from '@/libs/db';
 }
 
 
-// 2️⃣ Consulta docentes
+
 export async function SolicitudDocente() {
   try {
     const [rows] = await db.query(`
@@ -169,7 +169,7 @@ export async function SolicitudDocente() {
   }
 }
 
-// 3️⃣ Función general que retorna ambas
+
 export async function SolicitudGeneral() {
   try {
     const [estudiantes, docentes] = await Promise.all([
@@ -183,3 +183,29 @@ export async function SolicitudGeneral() {
     throw new Error("No se pudieron cargar las solicitudes generales");
   }
 }
+
+
+export async function ActualizarEstadoUsuario(usuario: string, estado: string) {
+  try {
+    const [result]: any = await db.query(
+      `
+      UPDATE USUARIO
+      SET ESTADO = ?
+      WHERE USUARIO = ?;
+      `,
+      [estado, usuario]
+    );
+
+    if (result.affectedRows === 0) {
+      throw new Error(`No se encontró un usuario con el nombre '${usuario}'`);
+    }
+
+    console.log(`✅ Usuario '${usuario}' actualizado a estado del usuario a '${estado}'`);
+    return { success: true, message: `Usuario '${usuario}' modificado correctamente` };
+
+  } catch (error) {
+    console.error('Error al actualizar el estado del usuario:', error);
+    throw new Error('No se pudo actualizar el estado del usuario');
+  }
+}
+

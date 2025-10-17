@@ -38,7 +38,7 @@ export default function Page() {
       setUsuarioAutenticado(usuario)
       console.log("Inicio de sesión exitoso:", usuario)
       if (usuario.rol == 'SECRETARIA') {
-        router.push('/user/secretaria')
+        router.push('/user/secretaria/solicitudes')
       }else if(usuario.rol == 'DOCENTE'){
         router.push('/user/docente')
       }else if(usuario.rol == 'RECTOR'){

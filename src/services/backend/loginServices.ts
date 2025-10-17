@@ -33,7 +33,7 @@ export async function iniciarSesion(data: loginPayload) {
         documento: usuario.documento,
         nombres: usuario.nombres,
         apellidos: usuario.apellidos,
-        permisos: usuario.permisos, 
+        permisos: usuario.permisos,
       },
     };
   } catch (error: any) {
@@ -63,7 +63,8 @@ const consultarUsuario = async (
         R.ROL, 
         P.DOCUMENTO, 
         P.N1, P.N2, P.AP1, P.AP2, 
-        PE.PERMISO 
+        PE.PERMISO,
+        PE.RUTA
       FROM USUARIO AS U 
       INNER JOIN PERSONA AS P ON P.DOCUMENTO = U.FK_PERSONA
       INNER JOIN ROL AS R ON R.ID_ROL = U.ID_ROL
@@ -77,8 +78,10 @@ const consultarUsuario = async (
     if (registros.length === 0) return null;
 
     const base = registros[0];
-
-    const permisos = registros.map(r => r.PERMISO);
+    const permisos = registros.map((r) => ({
+      nombre: r.PERMISO,
+      ruta: r.RUTA || '#',
+    }));
 
     return {
       id: base.ID,

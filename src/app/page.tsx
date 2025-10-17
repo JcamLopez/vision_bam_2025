@@ -34,9 +34,9 @@ export default function Page() {
         {/* Menú lateral */}
         <aside className={style.menu}>
           <ul>
-            <li><a href="/auth/mision_y_vision">Misión</a></li>
-            <li><a href="/auth/mision_y_vision">Visión</a></li>
-            <li><a href="/auth/Nosotros">Nosotros</a></li>
+            <li><a href="/colegio/mision_y_vision">Misión</a></li>
+            <li><a href="/colegio/mision_y_vision">Visión</a></li>
+            <li><a href="/colegio/Nosotros">Nosotros</a></li>
             <li><a href="https://iebam.edu.co/wp-content/uploads/2020/10/manual-de-convivencia.pdf" target="_blank">Manual</a></li>
           </ul>
         </aside>
